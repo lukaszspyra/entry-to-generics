@@ -2,31 +2,30 @@ package spyra.lukasz.comparison;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-public class PreAcademyStudent implements Comparable<PreAcademyStudent>{
+public class PreAcademyStudentLecture implements Comparable<PreAcademyStudentLecture>{
 
     int points;
 
-    PreAcademyStudent(final int points) {
+    PreAcademyStudentLecture(final int points) {
         this.points = points;
     }
 
-    PreAcademyStudent() {
+    PreAcademyStudentLecture() {
         this(0);
     }
 
     @Override
-    public int compareTo(final PreAcademyStudent o) {
+    public int compareTo(final PreAcademyStudentLecture o) {
 
         return -Integer.compare(points, o.points);
     }
 
     public static void main(String[] args) {
-        PreAcademyStudent s5 = new PreAcademyStudent(5);
-        PreAcademyStudent s1 = new PreAcademyStudent(1);
-        PreAcademyStudent s10 = new PreAcademyStudent(10);
+        PreAcademyStudentLecture s5 = new PreAcademyStudentLecture(5);
+        PreAcademyStudentLecture s1 = new PreAcademyStudentLecture(1);
+        PreAcademyStudentLecture s10 = new PreAcademyStudentLecture(10);
 
         int compare5to6 = s5.compareTo(s1); //+1
         int compare1to10 = s1.compareTo(s10); //-1
@@ -36,7 +35,7 @@ public class PreAcademyStudent implements Comparable<PreAcademyStudent>{
         System.out.println(compare1to10);
         System.out.println(compare10to10);
 
-        List<PreAcademyStudent> students = new ArrayList<>();
+        List<PreAcademyStudentLecture> students = new ArrayList<>();
         students.add(s5);
         students.add(s1);
         students.add(s10);
@@ -49,9 +48,10 @@ public class PreAcademyStudent implements Comparable<PreAcademyStudent>{
 
 
         //reverse ordering with custom comparator
-        students.sort(PreAcademyStudent::compareTo);
+        students.sort(PreAcademyStudentLecture::compareTo);
 
         System.out.println(students);
+
     }
 
 
