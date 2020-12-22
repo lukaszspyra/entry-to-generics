@@ -1,4 +1,4 @@
-package spyra.lukasz.comparison;
+package spyra.lukasz.comparison.lecture;
 
 import java.util.ArrayList;
 import java.util.List;

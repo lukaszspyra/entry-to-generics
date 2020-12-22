@@ -1,6 +1,6 @@
-package spyra.lukasz.comparison;
+package spyra.lukasz.comparison.lecture;
 
-public class Comparator {
+public class MyComparator {
 
     public static void main(String[] args) {
         System.out.println("ints " + compare(0, 1));
