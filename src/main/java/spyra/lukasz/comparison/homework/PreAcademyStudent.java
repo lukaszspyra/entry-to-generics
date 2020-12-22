@@ -2,12 +2,16 @@ package spyra.lukasz.comparison.homework;
 
 import java.util.Comparator;
 
-record PreAcademyStudent(int quizPoints, int taskPoints, int activityPoints) implements Comparable<PreAcademyStudent> {
+record PreAcademyStudent(String name, int quizPoints, int taskPoints, int activityPoints) implements Comparable<PreAcademyStudent> {
+
+    public int totalPoints(){
+        return quizPoints + taskPoints + activityPoints;
+    }
 
     @Override
     public int compareTo(final PreAcademyStudent o) {
-        int totalThisPoints = quizPoints + taskPoints + activityPoints;
-        int totalOtherPoints = o.quizPoints + o.taskPoints + o.activityPoints;
+        int totalThisPoints = totalPoints();
+        int totalOtherPoints = o.totalPoints();
         return Integer.compare(totalThisPoints, totalOtherPoints);
     }
 
@@ -23,14 +27,21 @@ record PreAcademyStudent(int quizPoints, int taskPoints, int activityPoints) imp
 
 }
 
-class ActivityComparator implements Comparator<PreAcademyStudent> {
+class ActivityAscComparator implements Comparator<PreAcademyStudent> {
     @Override
     public int compare(final PreAcademyStudent o1, final PreAcademyStudent o2) {
         return Integer.compare(o1.activityPoints(), o2.activityPoints());
     }
 }
 
-class QuizComparator implements Comparator<PreAcademyStudent> {
+class ActivityDescComparator implements Comparator<PreAcademyStudent> {
+    @Override
+    public int compare(final PreAcademyStudent o1, final PreAcademyStudent o2) {
+        return Integer.compare(o2.activityPoints(), o1.activityPoints());
+    }
+}
+
+class QuizAscComparator implements Comparator<PreAcademyStudent> {
 
     @Override
     public int compare(final PreAcademyStudent o1, final PreAcademyStudent o2) {
@@ -38,10 +49,26 @@ class QuizComparator implements Comparator<PreAcademyStudent> {
     }
 }
 
-class TaskComparator implements Comparator<PreAcademyStudent> {
+class QuizDescComparator implements Comparator<PreAcademyStudent> {
+
+    @Override
+    public int compare(final PreAcademyStudent o1, final PreAcademyStudent o2) {
+        return Integer.compare(o2.quizPoints(), o1.quizPoints());
+    }
+}
+
+class TaskAscComparator implements Comparator<PreAcademyStudent> {
 
     @Override
     public int compare(final PreAcademyStudent o1, final PreAcademyStudent o2) {
         return Integer.compare(o1.taskPoints(), o2.taskPoints());
+    }
+}
+
+class TaskDescComparator implements Comparator<PreAcademyStudent> {
+
+    @Override
+    public int compare(final PreAcademyStudent o1, final PreAcademyStudent o2) {
+        return Integer.compare(o2.taskPoints(), o1.taskPoints());
     }
 }

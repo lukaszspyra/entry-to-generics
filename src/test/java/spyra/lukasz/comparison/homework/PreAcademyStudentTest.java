@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
@@ -15,14 +16,14 @@ public class PreAcademyStudentTest {
 
 
     @Test(dataProvider = "unsortedLists")
-    void shallSortPreAcademyStudentsByTotalPoints(List<PreAcademyStudent> students) {
+    void shallSortPreAcademyStudentsByTotalPointsASC(List<PreAcademyStudent> students) {
         //given
         Object[] expectedSorting = new PreAcademyStudent[]{
-                new PreAcademyStudent(5, 6, 6),
-                new PreAcademyStudent(15, 7, 4),
-                new PreAcademyStudent(25, 4, 3),
-                new PreAcademyStudent(20, 9, 5),
-                new PreAcademyStudent(30, 10, 2),
+                new PreAcademyStudent("Student5", 5, 6, 6),
+                new PreAcademyStudent("Student4", 15, 7, 4),
+                new PreAcademyStudent("Student2", 25, 4, 3),
+                new PreAcademyStudent("Student3", 20, 9, 5),
+                new PreAcademyStudent("Student1", 30, 10, 2),
         };
 
         //when
@@ -35,19 +36,19 @@ public class PreAcademyStudentTest {
 
 
     @Test(dataProvider = "unsortedLists")
-    void shallSortPreAcademyStudentsByQuizPointsOnly(List<PreAcademyStudent> students) {
+    void shallSortPreAcademyStudentsByQuizPointsASC(List<PreAcademyStudent> students) {
         //given
         Object[] expectedSorting = new PreAcademyStudent[]{
-                new PreAcademyStudent(5, 6, 6),
-                new PreAcademyStudent(15, 7, 4),
-                new PreAcademyStudent(20, 9, 5),
-                new PreAcademyStudent(25, 4, 3),
-                new PreAcademyStudent(30, 10, 2),
+                new PreAcademyStudent("Student5", 5, 6, 6),
+                new PreAcademyStudent("Student4", 15, 7, 4),
+                new PreAcademyStudent("Student3", 20, 9, 5),
+                new PreAcademyStudent("Student2", 25, 4, 3),
+                new PreAcademyStudent("Student1", 30, 10, 2),
         };
-        QuizComparator quizComparator = new QuizComparator();
+        Comparator<PreAcademyStudent> comparator = SortingType.QUIZZES_ASC.comparator();
 
         //when
-        Collections.sort(students, quizComparator);
+        students.sort(comparator);
         Object[] resultSorting = students.toArray();
 
         //then
@@ -56,19 +57,19 @@ public class PreAcademyStudentTest {
 
 
     @Test(dataProvider = "unsortedLists")
-    void shallSortPreAcademyStudentsByTaskPointsOnly(List<PreAcademyStudent> students) {
+    void shallSortPreAcademyStudentsByTaskPointsASC(List<PreAcademyStudent> students) {
         //given
         Object[] expectedSorting = new PreAcademyStudent[]{
-                new PreAcademyStudent(25, 4, 3),
-                new PreAcademyStudent(5, 6, 6),
-                new PreAcademyStudent(15, 7, 4),
-                new PreAcademyStudent(20, 9, 5),
-                new PreAcademyStudent(30, 10, 2),
+                new PreAcademyStudent("Student2", 25, 4, 3),
+                new PreAcademyStudent("Student5", 5, 6, 6),
+                new PreAcademyStudent("Student4", 15, 7, 4),
+                new PreAcademyStudent("Student3", 20, 9, 5),
+                new PreAcademyStudent("Student1", 30, 10, 2),
         };
-        TaskComparator taskComparator = new TaskComparator();
+        Comparator<PreAcademyStudent> comparator = SortingType.TASKS_ASC.comparator();
 
         //when
-        Collections.sort(students, taskComparator);
+        students.sort(comparator);
         Object[] resultSorting = students.toArray();
 
         //then
@@ -76,19 +77,19 @@ public class PreAcademyStudentTest {
     }
 
     @Test(dataProvider = "unsortedLists")
-    void shallSortPreAcademyStudentsByActivityPointsOnly(List<PreAcademyStudent> students) {
+    void shallSortPreAcademyStudentsByActivityPointsASC(List<PreAcademyStudent> students) {
         //given
         Object[] expectedSorting = new PreAcademyStudent[]{
-                new PreAcademyStudent(30, 10, 2),
-                new PreAcademyStudent(25, 4, 3),
-                new PreAcademyStudent(15, 7, 4),
-                new PreAcademyStudent(20, 9, 5),
-                new PreAcademyStudent(5, 6, 6),
+                new PreAcademyStudent("Student1", 30, 10, 2),
+                new PreAcademyStudent("Student2", 25, 4, 3),
+                new PreAcademyStudent("Student4", 15, 7, 4),
+                new PreAcademyStudent("Student3", 20, 9, 5),
+                new PreAcademyStudent("Student5", 5, 6, 6),
         };
-        ActivityComparator activityComparator = new ActivityComparator();
+        Comparator<PreAcademyStudent> comparator = SortingType.ACTIVITIES_ASC.comparator();
 
         //when
-        Collections.sort(students, activityComparator);
+        students.sort(comparator);
         Object[] resultSorting = students.toArray();
 
         //then
@@ -97,11 +98,11 @@ public class PreAcademyStudentTest {
 
     @DataProvider()
     public static Object[] unsortedLists() {
-        PreAcademyStudent student1 = new PreAcademyStudent(30, 10, 2);    //total 42
-        PreAcademyStudent student2 = new PreAcademyStudent(25, 4, 3);     //total 33
-        PreAcademyStudent student3 = new PreAcademyStudent(20, 9, 5);     //total 34
-        PreAcademyStudent student4 = new PreAcademyStudent(15, 7, 4);     //total 26
-        PreAcademyStudent student5 = new PreAcademyStudent(5, 6, 6);      //total 17
+        PreAcademyStudent student1 = new PreAcademyStudent("Student1", 30, 10, 2);    //total 42
+        PreAcademyStudent student2 = new PreAcademyStudent("Student2", 25, 4, 3);     //total 33
+        PreAcademyStudent student3 = new PreAcademyStudent("Student3", 20, 9, 5);     //total 34
+        PreAcademyStudent student4 = new PreAcademyStudent("Student4", 15, 7, 4);     //total 26
+        PreAcademyStudent student5 = new PreAcademyStudent("Student5",5, 6, 6);      //total 17
 
         List<PreAcademyStudent> studentList1 = new ArrayList<>();
         studentList1.add(student1);
